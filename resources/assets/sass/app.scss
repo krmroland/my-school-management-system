@@ -1,0 +1,64 @@
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+@import "~font-awesome/scss/font-awesome";
+
+$swal2-success: $primary !default;
+@import "~sweetalert2/src/sweetalert2";
+@import "sidebar";
+@import "scrollbar";
+.navbar-light {
+    border-top: 6px solid theme-color("primary");
+}
+.navbar.navbar-light {
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+.card {
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+
+    .card-title {
+        text-align: center;
+    }
+}
+
+.bnt:hover {
+    cursor: pointer !important;
+}
+// .fa {
+//     color: #868e96;
+// }
+// .btn .fa {
+//     color: $white;
+// }
+
+.nav-link.active {
+    border-bottom: 3px solid theme-color("primary");
+}
+.relative {
+    position: relative !important;
+}
+
+body {
+    padding-top: 75px;
+    padding-bottom: 71px;
+}
+
+.border-left {
+    border-left: 4px solid $primary;
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn {
+    cursor: pointer;
+}
