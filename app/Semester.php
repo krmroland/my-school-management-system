@@ -26,27 +26,10 @@ class Semester extends BaseModel
      *
      * @var array
      */
-    protected static $cacheKeys = [
+    protected $cacheKeys = [
         'semesters.*',
         'semesters.active',
     ];
-
-    /**
-     * hook into the booting process of the model.
-     */
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            static::clearCache();
-        });
-    }
-
-    protected static function clearCache()
-    {
-        cache()->deleteMultiple(static::$cacheKeys);
-    }
 
     public function scopeActive($builder)
     {
@@ -60,7 +43,7 @@ class Semester extends BaseModel
 
     public static function activateUsingId($id)
     {
-        static::clearCache();
+        cache()->flush();
         //deactivate all semesters
         static::query()->update(['is_active' => false]);
 

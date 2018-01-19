@@ -4,16 +4,14 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotesTable extends Migration
+class CreateTimeTablesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
-        Schema::create('notes', function (Blueprint $table) {
+        Schema::create('time_table', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -21,11 +19,9 @@ class CreateNotesTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('notes');
+        Schema::dropIfExists('time_table');
     }
 }

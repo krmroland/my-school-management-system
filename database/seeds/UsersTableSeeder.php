@@ -10,7 +10,7 @@ class UsersTableSeeder extends Seeder
         return User::Create([
             'name' => 'Ahimbisibwe Roland',
             'email' => 'roland@gmail.com',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('secret'),
         ]);
     }
 }

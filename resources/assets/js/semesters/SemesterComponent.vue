@@ -12,12 +12,12 @@
 
 <script>
   export default{
-    props:['data','active'],
+    props:['data'],
 
       computed:{
 
         isActive(){
-            return this.data.id== this.active.id ;
+            return this.data.id== this.activeSemester.id ;
         }
       },
       methods:{

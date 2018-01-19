@@ -2,9 +2,24 @@
 
 namespace App;
 
-class MySchool
+use Illuminate\Contracts\Support\Jsonable;
+
+class MySchool implements Jsonable, \JsonSerializable
 {
-    public function semesters()
+    public function jsonSerialize()
     {
+        return $this->toArray();
+    }
+
+    public function toArray()
+    {
+        return [
+            'activeSemester' => app('active_semester'),
+        ];
+    }
+
+    public function toJson($options = 0)
+    {
+        return $this->toArray();
     }
 }

@@ -10,7 +10,7 @@ $swal2-success: $primary !default;
 @import "sidebar";
 @import "scrollbar";
 .navbar-light {
-    border-top: 6px solid theme-color("primary");
+    border-top: 2px solid theme-color("primary");
 }
 .navbar.navbar-light {
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
@@ -43,8 +43,14 @@ $swal2-success: $primary !default;
 body {
     padding-top: 75px;
     padding-bottom: 71px;
+    &.opaque {
+        opacity: $modal-backdrop-opacity;
+    }
 }
 
+.relative {
+    position: relative !important;
+}
 .border-left {
     border-left: 4px solid $primary;
 }
@@ -61,4 +67,20 @@ body {
 
 .btn {
     cursor: pointer;
+}
+
+.no-overflow {
+    overflow: none !important;
+}
+.a4-content {
+    background: white;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+    box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+    overflow-wrap: break-word;
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 20px 30px;
+    font-size: 1.25rem;
 }

@@ -2,23 +2,54 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Faculty extends Model
+class Faculty extends BaseModel
 {
+    protected $cacheKeys = ['faculties.all'];
+
+    /**
+     * reset all faculties.
+     */
     public static function reset()
     {
+        cache()->flush();
+
         static::truncate();
 
-        static::create(config('faculties'));
-
-        cache()->forget('faculties.all');
+        static::insert(static::collectConfigData());
     }
 
-    public static function all(array $columns = ['*'])
+    protected static function collectConfigData()
+    {
+        return collect(config('faculties'))->map(function ($name, $code) {
+            return [
+                'name' => title_case($name),
+                'code' => title_case($code),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        })->toArray();
+    }
+
+    public static function getAll()
     {
         return cache()->rememberForever('faculties.all', function () {
             return static::oldest('name')->get();
+        });
+    }
+
+    /**
+     * find the cached id of the faculty.
+     *
+     * @param int $id
+     *
+     * @throws Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return self
+     */
+    public static function cachedId($id)
+    {
+        return cache()->rememberForever("faculties.$id", function () use ($id) {
+            return static::findOrFail($id);
         });
     }
 }

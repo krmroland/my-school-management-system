@@ -13,11 +13,11 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <script>
-   
+     window.MySchool= {!! json_encode(app("my_school")) !!}
     </script>
 </head>
 <body>
-    <div id="app">
+    <div id="app" >
         @include('layouts.nav')
         @yield('content')
     </div>

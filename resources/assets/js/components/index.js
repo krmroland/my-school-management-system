@@ -2,4 +2,6 @@ Vue.component("modal", require("./modal"));
 Vue.component("switch-component", require("./switch"));
 Vue.component("DateComponent", require("./DateComponent"));
 
+Vue.component("OverLay", require("./OverLay"));
 
+Vue.component("SimplePaginator", require("./SimplePaginator"));

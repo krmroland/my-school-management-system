@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CourseUnit;
+use App\Http\Requests\CourseUnitRequest;
 use Illuminate\Http\Request;
 
 class CourseUnitsController extends Controller
@@ -14,7 +15,11 @@ class CourseUnitsController extends Controller
      */
     public function index()
     {
-        return view('courseUnits.index');
+        $courseUnits = CourseUnit::getAll();
+
+        return view('courseUnits.index', compact('courseUnits'));
+
+        return view('');
     }
 
     /**
@@ -33,8 +38,11 @@ class CourseUnitsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CourseUnitRequest $request)
     {
+        CourseUnit::create($request->validated());
+
+        return CourseUnit::getAll();
     }
 
     /**

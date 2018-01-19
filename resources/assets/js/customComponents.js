@@ -1,4 +1,7 @@
-Vue.component("NotesComponent", require("./notes/NotesComponent"));
+Vue.component(
+    "CourseUnitsComponent",
+    require("./courseUnits/CourseUnitsComponent")
+);
 
 //semsters
 Vue.component("SemestersComponent", require("./semesters/SemestersComponent"));

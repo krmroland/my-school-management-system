@@ -1,2 +1,5 @@
 <?php
-return [];
+
+return [
+    'isae' => 'Institute of statistics and applied economics',
+];

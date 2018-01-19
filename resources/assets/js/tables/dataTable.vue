@@ -103,7 +103,6 @@
 				query:'',
 				columns:[],
 				rows:[],
-				results:new Paginator(),
 			}
 		},
 		mounted() {

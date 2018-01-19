@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\MySchool;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,8 +12,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->singleton('active_semester', function () {
+            return auth()->guest()
+            ? null
+            : auth()->user()->activeSemester();
+        });
+
         $this->app->singleton('my_school', function () {
-            return new MySchool();
+            return new \App\MySchool();
         });
 
         Carbon::serializeUsing(function ($carbon) {

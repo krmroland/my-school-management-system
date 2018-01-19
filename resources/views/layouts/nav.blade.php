@@ -10,8 +10,8 @@
     @auth
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('notes.index') }}">
-         Notes
+        <a class="nav-link" href="{{ route('courseUnits.index') }}">
+         Course Units
         </a>
       </li>
 
@@ -19,7 +19,6 @@
     <ul class="navbar-nav ml-auto mr-5 align-items-center my-0 py-0">
       <semesters-component 
         :semesters="{{ auth()->user()->allSemeters()}}"
-        :active="{{ auth()->user()->activeSemester() }}"
         ></semesters-component>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle d-flex align-items-center justify-content-between " href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

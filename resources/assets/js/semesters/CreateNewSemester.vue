@@ -42,6 +42,7 @@ export default {
     mounted(){
         window.globalBus.$on("createNewSemester",()=>{
             this.isCreating=true;
+
         })
     },
     methods: {
@@ -49,10 +50,10 @@ export default {
             axios
                 .post("/semesters", this.form)
                 .then(({data}) => {
-                    flash.success("Semester was added successfully");
-                    this.isCreating = false;
-                    console.log(data)
-                    //window.location.reload();
+                    // flash.success("Semester was added successfully");
+                    // this.isCreating = false;
+                    // console.log(data)
+                     window.location.reload();
                 })
                 .catch(errors => {
                     console.log(errors.response.data);
