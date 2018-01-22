@@ -44,8 +44,8 @@ class NotesTableSeeder extends Seeder
     {
         $contents = '<h1>'.$this->faker->sentence(4).'</h4> ';
 
-        for ($i = 0; $i < 4; ++$i) {
-            $contents .= '<p>'.$this->faker->paragraph(50).'</p>';
+        for ($i = 0; $i < 10; ++$i) {
+            $contents .= '<br> <p>'.$this->faker->paragraph(10).'</p>';
         }
 
         return $contents;

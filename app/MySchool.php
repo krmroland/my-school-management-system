@@ -15,6 +15,7 @@ class MySchool implements Jsonable, \JsonSerializable
     {
         return [
             'activeSemester' => app('active_semester'),
+            'DROPBOX_TOKEN' => config('services.dropbox.token'),
         ];
     }
 

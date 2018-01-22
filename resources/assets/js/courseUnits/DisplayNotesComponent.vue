@@ -5,20 +5,18 @@
             <CreateNotesPage @onSubmit="addPage">
             </CreateNotesPage>
         </modal>
-        <div class="plus-btn flex-column flex-center">
-            <a href="#" @click.prevent="isCreating=true" title="Add Page">
-                <i class="fa fa-plus-square-o fa-3x"></i>
-            </a>
-            <CourseUnitNotesPdfGenerator>
-                
-            </CourseUnitNotesPdfGenerator>
-        </div>
+        <PageIconsComponent 
+            :courseUnit="courseUnit"
+            :dataPaginator="paginatedNotes"
+            @itemsChanged="itemsChanged"
+            @isCreating="isCreating=true"
+        ></PageIconsComponent>
         <div class="flex-center" v-if="isFetching">
             <i class="fa fa-spin fa-spinner"></i>
             <span class="ml-3"> Fetching notes ....</span>
         </div>
         <div  v-else>
-            <template v-for ="note,index in notes.data">
+            <template v-for ="note,index in notes">
              <PageNotesComponent 
                 @edit="editableIndex=index"
                 :pageNotes="note"
@@ -26,12 +24,7 @@
                 >
              </PageNotesComponent>
             </template>
-            <SimplePaginator 
-                :dataPaginator="[paginatedNotes]"
-                @itemsChanged="notes=$event"
-            >
-                
-            </SimplePaginator>
+         
             <CourseUnitTextEditor 
                 v-if="editableIndex!=null"
                 :editableIndex.sync="editableIndex"
@@ -50,14 +43,15 @@ let cachedNotes={};
 import CreateNotesPage from "./CreateNotesPage";
 import PageNotesComponent from "./PageNotesComponent";
 import CourseUnitTextEditor from "./CourseUnitTextEditor";
-import CourseUnitNotesPdfGenerator from "./CourseUnitNotesPdfGenerator";
+
+import PageIconsComponent from "./PageIconsComponent";
 
 export default {
     components:{
         CreateNotesPage,
         PageNotesComponent,
         CourseUnitTextEditor,
-        CourseUnitNotesPdfGenerator
+        PageIconsComponent
     },
 
     props: ["courseUnit"],
@@ -86,6 +80,10 @@ export default {
         }
     },
     methods: {
+        itemsChanged(notes){
+            this.notes=notes;
+            window.scrollTo(0,0);
+        },
         notesIsCached(){
             return  hasOwnProp(cachedNotes,this.id)
         },
@@ -134,12 +132,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-    .plus-btn{
-        position: fixed;
-        right:5px;
-        top:80px;
-        bottom:0;
-    }
-</style>

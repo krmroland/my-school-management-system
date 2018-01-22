@@ -30,6 +30,14 @@ Route::post('activateSemester/{semester}', 'ActivateSemestersController@store');
 
 Route::resource('/faculties', 'FacultyController');
 
-Route::get('/test', function () {
-    return dd(app('request')->isUpdating());
+//backups
+Route::get('/backups', function () {
+    return response(
+        file_get_contents(database_path('/database.sqlite')),
+        200,
+        [
+            'Content-Type' => 'application/txt',
+            'Content-Disposition' => 'inline; filename="database.sqlite"',
+        ]
+    );
 });

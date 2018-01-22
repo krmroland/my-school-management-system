@@ -2,7 +2,7 @@ import "./bootstrap";
 import "./navbarLinks";
 import "./components";
 import "./customComponents";
-import "./tables";
+//import "./tables";
 import "./forms";
 import "./search";
 import "./textEditor";

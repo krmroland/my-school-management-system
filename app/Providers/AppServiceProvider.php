@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('my_school', function () {
             return new \App\MySchool();
         });
+
+        Blade::doubleEncode();
 
         Carbon::serializeUsing(function ($carbon) {
             return $carbon->format('d/m/Y');

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Helpers\CourseUnitPdfGenerator;
 use App\Helpers\InteractsWithSemesters;
 use App\Helpers\InteractsWithUser;
 
@@ -59,5 +60,6 @@ class CourseUnit extends BaseModel
 
     public function generatePdf()
     {
+        return (new CourseUnitPdfGenerator($this))->generate();
     }
 }
