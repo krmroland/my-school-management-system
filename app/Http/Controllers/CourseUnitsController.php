@@ -13,13 +13,14 @@ class CourseUnitsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $courseUnits = CourseUnit::getAll();
+        if ($request->wantsJson()) {
+            return $courseUnits;
+        }
 
         return view('courseUnits.index', compact('courseUnits'));
-
-        return view('');
     }
 
     /**
@@ -54,6 +55,7 @@ class CourseUnitsController extends Controller
      */
     public function show(CourseUnit $courseUnit)
     {
+        return $courseUnit;
     }
 
     /**

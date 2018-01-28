@@ -4,8 +4,6 @@ namespace App;
 
 class Faculty extends BaseModel
 {
-    protected $cacheKeys = ['faculties.all'];
-
     /**
      * reset all faculties.
      */
@@ -30,11 +28,9 @@ class Faculty extends BaseModel
         })->toArray();
     }
 
-    public static function getAll()
+    public static function cacheAll()
     {
-        return cache()->rememberForever('faculties.all', function () {
-            return static::oldest('name')->get();
-        });
+        return static::oldest('name')->get();
     }
 
     /**
@@ -48,7 +44,7 @@ class Faculty extends BaseModel
      */
     public static function cachedId($id)
     {
-        return cache()->rememberForever("faculties.$id", function () use ($id) {
+        return static::tableCacheTag()->seal("$id", function () use ($id) {
             return static::findOrFail($id);
         });
     }

@@ -14,7 +14,7 @@ class MySchool implements Jsonable, \JsonSerializable
     public function toArray()
     {
         return [
-            'activeSemester' => app('active_semester'),
+            'activeIntake' => app('active_intake'),
             'DROPBOX_TOKEN' => config('services.dropbox.token'),
         ];
     }

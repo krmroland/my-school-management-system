@@ -14,7 +14,7 @@ Route::get('/login', function () {
 
 //Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::redirect('/home', '/courseUnits');
 //courseUnits
 Route::resource('courseUnits', 'CourseUnitsController');
 Route::resource('courseUnit.notes', 'CourseUnitNotesController');
@@ -22,11 +22,13 @@ Route::get('courseUnits/{courseUnit}/pdf', 'CourseUnitPdfController@index');
 Route::redirect('/', '/home');
 
 Route::get('/logout', 'Auth\LoginController@logout');
+//timetable
+Route::resource('/timetable', 'TimeTableController');
 
 //semesters
 Route::resource('semesters', 'SemesterController');
 
-Route::post('activateSemester/{semester}', 'ActivateSemestersController@store');
+Route::post('activateIntake/{id}', 'ActivateIntakesController@store');
 
 Route::resource('/faculties', 'FacultyController');
 

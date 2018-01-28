@@ -14,12 +14,17 @@
          Course Units
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/timetable">
+         Timetable
+        </a>
+      </li>
 
     </ul>
     <ul class="navbar-nav ml-auto mr-5 align-items-center my-0 py-0">
-      <semesters-component 
-        :semesters="{{ auth()->user()->allSemeters()}}"
-        ></semesters-component>
+      <intakes-component 
+          :intakes="{{ auth()->user()->allIntakes()}}"
+        ></intakes-component>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle d-flex align-items-center justify-content-between " href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <icon-user></icon-user>
@@ -42,5 +47,5 @@
   </div>
 </nav>
 @auth
-<create-new-semester></create-new-semester>
+<create-new-intake></create-new-intake>
 @endauth

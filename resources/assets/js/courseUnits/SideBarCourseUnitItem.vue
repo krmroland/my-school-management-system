@@ -4,7 +4,7 @@
         :class="{'border-left':isActive}"
         href="#"
         @click.prevent="activateCourseUnit">
-        {{ courseUnit.name }}
+        {{ courseUnit.name }} ({{ courseUnit.code }})
     </a>
 </template>
 

@@ -1,11 +1,29 @@
 <template>
   <modal :show.sync="isCreating" >
     <span slot="title">Create A New Course Unit</span>
-    <form action="" v-if="aSemesterIsSelected">
+    <form action="" v-if="anIntakeIsSelected">
       <InputComponent 
       label="Name"
       placeholder="Course Units Name"
       :value.sync="form.name"
+      ></InputComponent>
+
+      <InputComponent 
+      label="Code"
+      placeholder="Course Units Code"
+      :value.sync="form.code"
+      ></InputComponent>
+
+      <InputComponent 
+      label="Credit Units"
+      placeholder="Course Units Credit unit hours"
+      :value.sync="form.creditUnits"
+      ></InputComponent>
+
+      <InputComponent 
+      label="Lecturers name"
+      placeholder="Lecturers name"
+      :value.sync="form.lecturer"
       ></InputComponent>
       <div class="form-group">
           <label> Faculty</label>
@@ -19,7 +37,6 @@
               ({{ faculty.name }})
           </option>
       </select>
-      <option value="" > Please</option>
   </div>
   <button class="btn btn-primary"
   @click.prevent="save"
@@ -51,14 +68,18 @@ export default {
       faculties: [],
       form: {
         name: "",
-        faculty_id: ""
+        faculty_id: "",
+        code:'',
+        creditUnits:'',
+        lecturer:''
       }
     };
   },
   methods: {
     resetForm(){
-      this.form.name='';
-      this.form.faculty_id='';
+      for (let prop in this.form) {
+        this.form[prop]=''
+      }
     },
     fetchFaculties() {
       axios

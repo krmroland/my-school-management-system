@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,6 +24,9 @@ class MacroServiceProvider extends ServiceProvider
         });
         Request::macro('uniqueRule', function ($modal) {
             $rule = Rule::unique();
+        });
+        Blueprint::macro('indexedInteger', function ($column) {
+            return $this->integer($column)->unsigned()->index();
         });
     }
 

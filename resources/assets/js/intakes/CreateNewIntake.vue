@@ -40,7 +40,7 @@ export default {
         };
     },
     mounted(){
-        window.globalBus.$on("createNewSemester",()=>{
+        window.globalBus.$on("createNewIntake",()=>{
             this.isCreating=true;
 
         })

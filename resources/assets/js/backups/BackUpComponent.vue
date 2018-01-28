@@ -35,6 +35,7 @@ const isOnline=function computerIsOnline(){
    if (nativeOnline!==undefined) {
     return nativeOnline;
    }
+   // i will do some poly filling here;
 }
   export default{
       methods:{

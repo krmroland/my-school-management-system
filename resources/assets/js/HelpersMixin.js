@@ -2,11 +2,11 @@ import numeral from "numeral";
 import capitalize from "lodash/capitalize";
 export default Vue.mixin({
     computed: {
-        activeSemester() {
-            return window.MySchool.activeSemester;
+        activeIntake() {
+            return window.MySchool.activeIntake;
         },
-        aSemesterIsSelected() {
-            return this.activeSemester && this.activeSemester.id > -1;
+        anIntakeIsSelected() {
+            return this.activeIntake && this.activeIntake.semester.id > -1;
         }
     },
 

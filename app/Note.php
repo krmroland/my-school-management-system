@@ -9,11 +9,29 @@ class Note extends BaseModel
 
     protected $dates = ['date'];
 
+    /**
+     * these notes belong to a course unit.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function courseUnit()
+    {
+        return $this->belongsTo(CourseUnit::class);
+    }
+
     public static function updateById($id, $data)
     {
-        //clear the entire cache
-        cache()->flush();
+        tap(static::findOrFail($id), function ($note) use ($data) {
+            $note->update($data);
+            //clear the notes cache
+            $note->courseUnit->notesCache()->flush();
+        });
+    }
 
-        static::findOrFail($id)->update($data);
+    public function hasCache()
+    {
+        //there is no place where we are fetching the notes
+        //they them selves, the course unit is responsible for fetching them
+        return false;
     }
 }

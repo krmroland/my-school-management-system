@@ -13,7 +13,7 @@ class CreateTimeTablesTable extends Migration
     {
         Schema::create('time_table', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->indexedInteger('intake_id');
         });
     }
 

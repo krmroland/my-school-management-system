@@ -1,4 +1,5 @@
 <template>
+  <!-- jsa -->
      <a 
             class="dropdown-item" 
             href="#" 
@@ -17,12 +18,12 @@
       computed:{
 
         isActive(){
-            return this.data.id== this.activeSemester.id ;
+            return this.data.id== this.activeIntake.id ;
         }
       },
       methods:{
         activateSemester(semester){
-            axios.post(`/activateSemester/${this.data.id}`).then(response=>{
+            axios.post(`/activateIntake/${this.data.id}`).then(response=>{
                 window.location.reload();
             }).catch(errors=>{
                 console.log(errors.response.data);

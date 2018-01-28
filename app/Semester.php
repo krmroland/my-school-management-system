@@ -2,54 +2,32 @@
 
 namespace App;
 
-use App\Helpers\InteractsWithUser;
-
 class Semester extends BaseModel
 {
-    use InteractsWithUser;
-
-    /**
-     * cast the following fields to native types.
-     *
-     * @var array
-     */
-    protected $casts = ['is_active' => 'boolean'];
-
     /**
      * append the following attributes on serialization.
      *
      * @var array
      */
     protected $appends = ['fullName'];
-    /**
-     * the cache keys.
-     *
-     * @var array
-     */
-    protected $cacheKeys = [
-        'semesters.*',
-        'semesters.active',
-    ];
-
-    public function scopeActive($builder)
-    {
-        return $builder->where(['is_active' => true]);
-    }
 
     public function getFullNameAttribute()
     {
         return "$this->name ($this->academic_year)";
     }
 
-    public static function activateUsingId($id)
+    public function intake()
     {
-        cache()->flush();
-        //deactivate all semesters
-        static::query()->update(['is_active' => false]);
+        return $this->hasMany(Intake::class);
+    }
 
-        if ($id == -1) {
-            return;
-        }
-        static::findOrFail($id)->update(['is_active' => true]);
+    public static function boot()
+    {
+        parent::boot();
+        // temporarily we will create a new intake
+        // when a semester is created
+        static::created(function ($semester) {
+            $semester->intake()->create([]);
+        });
     }
 }

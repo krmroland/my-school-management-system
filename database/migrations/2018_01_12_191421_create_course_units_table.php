@@ -14,9 +14,11 @@ class CreateCourseUnitsTable extends Migration
         Schema::create('course_units', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('faculty_id')->unsigned()->index();
-            user_id_field($table);
-            semester_id_field($table);
+            $table->indexedInteger('faculty_id');
+            $table->indexedInteger('intake_id');
+            $table->string('code', 10)->unique();
+            $table->string('lecturer')->nullable();
+            $table->tinyInteger('creditUnits')->unsigned();
             $table->timestamps();
         });
     }

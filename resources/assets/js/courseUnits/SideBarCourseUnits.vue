@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar-contents">
-        <div class="list-group mb-1" v-if="aSemesterIsSelected">
+        <div class="list-group mb-1" v-if="anIntakeIsSelected">
             <a href="#" class="list-group-item list-group-item-action"
             @click.prevent="activateCreating"
 

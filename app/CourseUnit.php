@@ -3,30 +3,21 @@
 namespace App;
 
 use App\Helpers\CourseUnitPdfGenerator;
-use App\Helpers\InteractsWithSemesters;
-use App\Helpers\InteractsWithUser;
+use App\Helpers\HasNotes;
+use App\Helpers\InteractsWithIntakes;
 
 class CourseUnit extends BaseModel
 {
-    use InteractsWithSemesters,InteractsWithUser;
-    /**
-     * the cache keys that should be cleared on model events.
-     *
-     * @var array
-     */
-    protected $cacheKeys = ['courseUnits.*'];
+    use InteractsWithIntakes,HasNotes;
 
     /**
      * Gets all.
      *
      * @return Collection all
      */
-    public static function getAll()
+    public static function cacheAll()
     {
-        return cache()->rememberForever('courseUnits.*', function () {
-            return static::latest('name')
-            ->get(['name', 'semester_id', 'id']);
-        });
+        return static::oldest('name')->get(['name', 'semester_id', 'id', 'code'])->keyBy('code');
     }
 
     public function setNameAttribute($name)
@@ -34,32 +25,17 @@ class CourseUnit extends BaseModel
         $this->attributes['name'] = title_case($name);
     }
 
-    public function notes()
+    public function setCodeAttribute($code)
     {
-        return $this->hasMany(Note::class);
-    }
-
-    public function cachedPaginatedNotes($page = null)
-    {
-        $key = "courseUnits/$this->id/notes/$page";
-
-        return cache()->remember($key, 15, function () {
-            return $this->notes()->oldest('date')->simplePaginate(4);
-        });
-    }
-
-    public function addNotes($data)
-    {
-        //clear the cache
-        cache()->flush();
-
-        $this->notes()->create($data);
-
-        return $this;
+        $this->attributes['code'] = strtoupper($code);
     }
 
     public function generatePdf()
     {
         return (new CourseUnitPdfGenerator($this))->generate();
+    }
+
+    public function timeTable()
+    {
     }
 }

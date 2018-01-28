@@ -4,8 +4,10 @@ Vue.component(
 );
 
 //semsters
-Vue.component("SemestersComponent", require("./semesters/SemestersComponent"));
+Vue.component("IntakesComponent", require("./intakes/IntakesComponent"));
 
-Vue.component("CreateNewSemester", require("./semesters/CreateNewSemester"));
+Vue.component("CreateNewIntake", require("./intakes/CreateNewIntake"));
 
-Vue.component("BackUpComponent", require("./backups/BackUpComponent"));
+//Vue.component("BackUpComponent", require("./backups/BackUpComponent"));
+
+Vue.component("TimetableComponent", require("./timetable/TimetableComponent"));

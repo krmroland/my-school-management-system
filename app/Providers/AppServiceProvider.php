@@ -13,14 +13,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->singleton('active_semester', function () {
-            return auth()->guest()
-            ? null
-            : auth()->user()->activeSemester();
-        });
-
         $this->app->singleton('my_school', function () {
             return new \App\MySchool();
+        });
+
+        $this->app->singleton('active_intake', function () {
+            return optionalLoggedIn()->activeIntake();
         });
 
         Blade::doubleEncode();
